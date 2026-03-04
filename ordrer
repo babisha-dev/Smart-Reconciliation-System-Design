@@ -1,0 +1,41 @@
+backend :
+1.  application.properties        ← database connection, JWT secret
+2.  Role.java                     ← enum (ADMIN, ANALYST, VIEWER)
+3.  MatchStatus.java              ← enum (MATCHED, PARTIAL, etc)
+4.  UploadStatus.java             ← enum (PROCESSING, COMPLETED, FAILED)
+5.  User.java                     ← model/entity
+6.  UploadJob.java                ← model/entity
+7.  TransactionRecord.java        ← model/entity
+8.  ReconciliationResult.java     ← model/entity
+9.  AuditLog.java                 ← model/entity
+10. UserRepository.java           ← just an interface, Spring writes SQL for you
+11. UploadJobRepository.java      ← interface
+12. TransactionRecordRepository   ← interface
+13. ReconciliationResultRepository← interface
+14. AuditLogRepository.java       ← interface
+15. JwtUtil.java                  ← generates and validates JWT tokens
+16. CustomUserDetailsService.java ← loads user from DB for Spring Security
+17. JwtFilter.java                ← checks JWT on every request
+18. SecurityConfig.java           ← which URLs need login, which are public
+19. DataInitializer.java          ← seeds 3 default users on startup
+20. AuditService.java             ← saves audit log entries
+21. ReconciliationEngine.java     ← matching logic (MATCHED/PARTIAL/etc)
+22. FileProcessingService.java    ← reads CSV/Excel, saves rows to DB
+23. AuthController.java           ← POST /api/auth/login
+24. UploadController.java         ← POST /api/upload/submit
+25. ReconciliationController.java ← GET /api/reconciliation/results
+26. AuditController.java          ← GET /api/audit
+
+
+frontend:
+
+1.  index.js                 ← entry point
+2.  App.js                   ← routes
+3.  services/api.js          ← all axios calls in one place
+4.  context/AuthContext.js   ← login state available everywhere
+5.  components/Auth/Login.js ← login form
+6.  components/Layout.js     ← sidebar + header shell
+7.  components/Dashboard.js  ← charts and summary numbers
+8.  components/FileUpload.js ← drag and drop + column mapping
+9.  components/Reconciliation.js ← results table
+10. components/AuditTrail.js ← timeline
